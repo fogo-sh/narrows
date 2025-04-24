@@ -1,1 +1,6 @@
 .env
+.DS_Store
+
+# React Router
+/.react-router/
+/build/
