@@ -10,7 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import (
 	"fmt"
-	"github.com/nint8835/scribe/pkg/web/static"
+	"github.com/fogo-sh/narrows/pkg/web/static"
 )
 
 func getTitleString(title string) string {

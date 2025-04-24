@@ -13,10 +13,10 @@ import (
 	"golang.org/x/oauth2"
 	goldmark_discord_mentions "pkg.nit.so/goldmark-discord-mentions"
 
-	"github.com/nint8835/scribe/pkg/bot"
-	"github.com/nint8835/scribe/pkg/config"
-	"github.com/nint8835/scribe/pkg/web/static"
-	"github.com/nint8835/scribe/pkg/web/ui/pages"
+	"github.com/fogo-sh/narrows/pkg/bot"
+	"github.com/fogo-sh/narrows/pkg/config"
+	"github.com/fogo-sh/narrows/pkg/web/static"
+	"github.com/fogo-sh/narrows/pkg/web/ui/pages"
 )
 
 type Server struct {
@@ -110,14 +110,8 @@ func New() (*Server, error) {
 	// All routes below this point require authentication
 
 	serverInst.serveMux.HandleFunc("GET /{$}", errorHandler(serverInst.requireAuth(serverInst.handleGetHome)))
-	serverInst.serveMux.HandleFunc("GET /leaderboard", errorHandler(serverInst.requireAuth(serverInst.handleGetLeaderboard)))
-	serverInst.serveMux.HandleFunc("GET /list", errorHandler(serverInst.requireAuth(serverInst.handleGetList)))
 
-	serverInst.serveMux.HandleFunc("GET /rank", errorHandler(serverInst.requireAuth(serverInst.handleGetRank)))
-	serverInst.serveMux.HandleFunc("POST /rank", errorHandler(serverInst.requireAuth(serverInst.handlePostRank)))
-	serverInst.serveMux.HandleFunc("GET /rank/stats", errorHandler(serverInst.requireAuth(serverInst.handleRankStats)))
-
-	slog.Info("Web server listening on port 8000")
+	slog.Info("web server listening on port 8000")
 
 	return serverInst, nil
 }

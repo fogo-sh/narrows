@@ -14,7 +14,7 @@ RUN make prod-css && CGO_ENABLED=0 go build
 
 FROM gcr.io/distroless/static AS bot
 
-WORKDIR /bot
-COPY --from=builder /build/scribe /bot/scribe
+WORKDIR /app
+COPY --from=builder /build/narrows /app/narrows
 
-ENTRYPOINT ["/bot/scribe"]
+ENTRYPOINT ["/app/narrows"]

@@ -2,15 +2,15 @@ package ui
 
 import (
 	"fmt"
-	"github.com/nint8835/scribe/pkg/web/static"
+	"github.com/fogo-sh/narrows/pkg/web/static"
 )
 
 func getTitleString(title string) string {
 	if title == "" {
-		return "Scribe"
+		return "narrows"
 	}
 
-	return fmt.Sprintf("%s - Scribe", title)
+	return fmt.Sprintf("%s - narrows", title)
 }
 
 func getStyles() string {
@@ -35,7 +35,7 @@ templ Layout(title string) {
 			<title>{ getTitleString(title) }</title>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
-			<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📜</text></svg>"/>
+			<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛥️</text></svg>"/>
 			<link rel="stylesheet" href={ static.GetStaticPath("tailwind.css") }/>
 			<script src={ static.GetStaticPath("htmx.min.js") }></script>
 			<script src={ static.GetStaticPath("preload.min.js") }></script>

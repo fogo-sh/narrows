@@ -1,12 +1,12 @@
 {
-    "editor.formatOnSave": true,
-    "gopls": {
-        "formatting.local": "github.com/nint8835/scribe"
-    },
-    "[templ]": {
-        "editor.defaultFormatter": "a-h.templ"
-    },
-    "tailwindCSS.includeLanguages": {
-        "templ": "html"
-    }
+  "editor.formatOnSave": true,
+  "gopls": {
+    "formatting.local": "github.com/fogo-sh/narrows"
+  },
+  "[templ]": {
+    "editor.defaultFormatter": "a-h.templ"
+  },
+  "tailwindCSS.includeLanguages": {
+    "templ": "html"
+  }
 }

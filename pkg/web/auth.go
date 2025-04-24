@@ -7,7 +7,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 	"github.com/gorilla/sessions"
 
-	"github.com/nint8835/scribe/pkg/config"
+	"github.com/fogo-sh/narrows/pkg/config"
 )
 
 func (s *Server) getSession(r *http.Request) *sessions.Session {

@@ -4,10 +4,9 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/nint8835/scribe/pkg/bot"
-	"github.com/nint8835/scribe/pkg/config"
-	"github.com/nint8835/scribe/pkg/database"
-	"github.com/nint8835/scribe/pkg/web"
+	"github.com/fogo-sh/narrows/pkg/config"
+	"github.com/fogo-sh/narrows/pkg/database"
+	"github.com/fogo-sh/narrows/pkg/web"
 )
 
 func main() {
@@ -19,22 +18,6 @@ func main() {
 
 	database.Initialize(config.Instance.DBPath)
 
-	botInst, err := bot.New()
-	if err != nil {
-		slog.Error("Error creating bot", "error", err)
-		os.Exit(1)
-	}
-
-	if config.Instance.RunBot {
-		go func() {
-			err = botInst.Run()
-			if err != nil {
-				slog.Error("Error running bot", "error", err)
-				os.Exit(1)
-			}
-		}()
-	}
-
 	webServer, err := web.New()
 	if err != nil {
 		slog.Error("Error creating web server", "error", err)
@@ -45,9 +28,5 @@ func main() {
 	if err != nil {
 		slog.Error("Error running web server", "error", err)
 		os.Exit(1)
-	}
-
-	if botInst != nil {
-		botInst.Stop()
 	}
 }

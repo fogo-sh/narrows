@@ -1,4 +1,4 @@
-module github.com/nint8835/scribe
+module github.com/fogo-sh/narrows
 
 go 1.24.0
 
