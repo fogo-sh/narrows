@@ -1,10 +1,13 @@
 {
   "name": "narrows",
-  "module": "index.ts",
+  "module": "app.ts",
   "type": "module",
-  "private": true,
+  "scripts": {
+    "dev": "NODE_ENV=development bun run app.ts"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "discord-api-types": "^0.38.1"
   },
   "peerDependencies": {
     "typescript": "^5"
