@@ -1,6 +1,0 @@
-CREATE TABLE "users" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "username" TEXT NOT NULL,
-    "discord_id" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
