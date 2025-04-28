@@ -7,7 +7,7 @@
       "source": "src/server.tsx",
       "context": "react-server",
       "includeNodeModules": {
-        "hono": false
+        "express": false
       }
     }
   },
@@ -16,15 +16,15 @@
     "build": "parcel build"
   },
   "dependencies": {
-    "@hono/node-server": "^1.14.1",
     "@parcel/rsc": "^2.14.3",
-    "hono": "^4.7.7",
+    "express": "^4.21.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.5",
+    "@types/express": "^4",
     "@types/parcel-env": "^0.0.6",
+    "@types/node": "^22.10.5",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "parcel": "^2.14.0"

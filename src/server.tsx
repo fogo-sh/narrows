@@ -1,32 +1,25 @@
-import { Hono } from "hono";
-import { type HttpBindings, serve } from "@hono/node-server";
-import { serveStatic } from "@hono/node-server/serve-static";
+import express from "express";
 import { renderRequest, callAction } from "@parcel/rsc/node";
 
 import { Page } from "./Page";
 
-const app = new Hono<{ Bindings: HttpBindings }>();
+const app = express();
 
-app.use("/*", serveStatic({ root: "./dist" }));
+app.use(express.static("dist"));
 
-app.get("/", async (c) => {
-  await renderRequest(c.env.incoming, c.env.outgoing, <Page />, {
-    component: Page,
-  });
-  return c.body(null);
+app.get("/", async (req, res) => {
+  await renderRequest(req, res, <Page />, { component: Page });
 });
 
-app.post("/", async (c) => {
-  const id = c.req.header("rsc-action-id");
-  const { result } = await callAction(c.env.incoming, id);
+app.post("/", async (req, res) => {
+  let id = req.get("rsc-action-id");
+  let { result } = await callAction(req, id);
   let root: any = <Page />;
   if (id) {
     root = { result, root };
   }
-  await renderRequest(c.env.incoming, c.env.outgoing, root, {
-    component: Page,
-  });
-  return c.body(null);
+  await renderRequest(req, res, root, { component: Page });
 });
 
-serve({ fetch: app.fetch, port: 3000 });
+app.listen(3000);
+console.log("Server listening on port 3000");

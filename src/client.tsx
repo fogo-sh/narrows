@@ -23,9 +23,6 @@ let updateRoot = hydrate({
   },
 });
 
-// A very simple router. When we navigate, we'll fetch a new RSC payload from the server,
-// and in a React transition, stream in the new page. Once complete, we'll pushState to
-// update the URL in the browser.
 async function navigate(pathname: string, push = false) {
   let root = await fetchRSC<ReactNode>(pathname);
   updateRoot(root, () => {
@@ -35,7 +32,6 @@ async function navigate(pathname: string, push = false) {
   });
 }
 
-// Intercept link clicks to perform RSC navigation.
 document.addEventListener("click", (e) => {
   let link = (e.target as Element).closest("a");
   if (
@@ -45,10 +41,10 @@ document.addEventListener("click", (e) => {
     (!link.target || link.target === "_self") &&
     link.origin === location.origin &&
     !link.hasAttribute("download") &&
-    e.button === 0 && // left clicks only
-    !e.metaKey && // open in new tab (mac)
-    !e.ctrlKey && // open in new tab (windows)
-    !e.altKey && // download
+    e.button === 0 &&
+    !e.metaKey &&
+    !e.ctrlKey &&
+    !e.altKey &&
     !e.shiftKey &&
     !e.defaultPrevented
   ) {
@@ -57,7 +53,6 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// When the user clicks the back button, navigate with RSC.
 window.addEventListener("popstate", (e) => {
   navigate(location.pathname);
 });
