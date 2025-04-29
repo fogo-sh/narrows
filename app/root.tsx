@@ -1,5 +1,6 @@
 import {
   isRouteErrorResponse,
+  Link,
   Links,
   Meta,
   Outlet,
@@ -9,19 +10,20 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { logout } from "./auth.server";
 
-export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
-];
+export const links: Route.LinksFunction = () => [];
+
+export async function action({ request }: Route.ActionArgs) {
+  const formData = await request.formData();
+  const action = formData.get("action");
+
+  if (action === "logout") {
+    return await logout(request);
+  }
+
+  return null;
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -33,7 +35,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <header>
+          <h1>narrows</h1>
+        </header>
+        <nav>
+          <Link to="/">
+            <button type="submit">home</button>
+          </Link>
+          <Link to="/account">
+            <button type="submit">account</button>
+          </Link>
+          <form method="post" action="/">
+            <input type="hidden" name="action" value="logout" />
+            <button type="submit">logout</button>
+          </form>
+        </nav>
+        <main>{children}</main>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -46,15 +63,15 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = "Oops!";
-  let details = "An unexpected error occurred.";
+  let message = "uh oh";
+  let details = "an unexpected error occurred";
   let stack: string | undefined;
 
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
+    message = error.status === 404 ? "404" : "error";
     details =
       error.status === 404
-        ? "The requested page could not be found."
+        ? "the requested page could not be found."
         : error.statusText || details;
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
@@ -62,14 +79,14 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
+    <div className="error-boundary">
       <h1>{message}</h1>
       <p>{details}</p>
       {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
+        <pre>
           <code>{stack}</code>
         </pre>
       )}
-    </main>
+    </div>
   );
 }
