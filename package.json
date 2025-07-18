@@ -14,11 +14,11 @@
     "@libsql/client": "^0.15.4",
     "@react-router/express": "^7.5.2",
     "@react-router/node": "^7.5.2",
-    "compression": "^1.7.5",
+    "compression": "^1.8.1",
     "drizzle-orm": "~0.36.3",
     "express": "^4.21.1",
     "isbot": "^5.1.17",
-    "morgan": "^1.10.0",
+    "morgan": "^1.10.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.5.2"
